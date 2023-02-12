@@ -1,6 +1,6 @@
-package org.example.GeradorCpf;
+package org.geradorPF.GeradorCpf;
 
-import org.example.Enum.ESTADO;
+import org.geradorPF.Enum.ESTADO;
 
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;

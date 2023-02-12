@@ -1,4 +1,4 @@
-package org.example.Enum;
+package org.geradorPF.Enum;
 
 public enum ESTADO {
 

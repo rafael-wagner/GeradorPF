@@ -1,7 +1,7 @@
-package org.example;
+package org.geradorPF;
 
 
-import org.example.GeradorCpf.GeradorCPF;
+import org.geradorPF.GeradorCpf.GeradorCPF;
 
 public class Main {
     public static void main(String[] args) {
