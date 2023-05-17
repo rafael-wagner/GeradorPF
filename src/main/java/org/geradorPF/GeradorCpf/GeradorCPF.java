@@ -4,6 +4,7 @@ import org.geradorPF.Enum.ESTADO;
 
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
+import static org.geradorPF.GeradorNumeros.GeradorNumero.gerarNumeroAleatorio;
 
 public class GeradorCPF {
 
@@ -18,34 +19,37 @@ public class GeradorCPF {
 
     public String gerarCpf(ESTADO estado) {
 
-        if(estado == null){
-            digitoRegional = gerarNumeroAleatorio();
-        } else {
-            digitoRegional = estado.getDigitoCpf();
-        }
+        this.verificarSeEstadoNull(estado);
 
         this.gerarNumeros();
         this.calcularDv1();
         this.calcularDv2();
 
-        return this.cpfToStringBeaty();
+        return this.cpfComMascara();
 
+    }
 
+    private void verificarSeEstadoNull(ESTADO estado) {
+        if (estado == null) {
+            digitoRegional = gerarNumeroAleatorio();
+        } else {
+            digitoRegional = estado.getDigitoCpf();
+        }
     }
 
     private String cpfToString() {
 
         String cpfString = "";
-        for (int i = 0; i < cpfValores.length; i++){
+        for (int i = 0; i < cpfValores.length; i++) {
             cpfString += cpfValores[i];
         }
-        cpfString+=digitoRegional;
-        cpfString+=dv1;
-        cpfString+=dv2;
+        cpfString += digitoRegional;
+        cpfString += dv1;
+        cpfString += dv2;
         return cpfString;
     }
 
-    public String cpfToStringBeaty() {
+    public String cpfComMascara() {
 
         String cpfString = cpfToString();
         try {
@@ -64,7 +68,7 @@ public class GeradorCPF {
         int y = 11;
 
         //Gerar numeros
-        for (int i = 0; i < cpfValores.length; i++){
+        for (int i = 0; i < cpfValores.length; i++) {
             cpfValores[i] = gerarNumeroAleatorio();
 
             somaDV1 += cpfValores[i] * x;
@@ -96,15 +100,6 @@ public class GeradorCPF {
         } else {
             dv2 = 11 - resultado;
         }
-    }
-
-    private int gerarNumeroAleatorio() {
-        final int valorMaximo = 9;
-        final int valorMinimo = 0;
-        final int range = valorMaximo - valorMinimo + 1;
-        int numeroGerado = (int) (Math.random() * range) + valorMinimo;
-
-        return numeroGerado;
     }
 
 

@@ -2,13 +2,13 @@ package org.geradorPF.Enum;
 
 public enum REGIAO {
 
-    CO("Centro-Oeste")
-    ,N("Norte")
-    ,NE("Nordeste")
-    ,S("Sul")
-    ,SE("Sudeste")
+    CO("Centro-Oeste", new ESTADO[] {ESTADO.DF,ESTADO.GO,ESTADO.MS,ESTADO.MT})
+    ,N("Norte", new ESTADO[] {ESTADO.AC,ESTADO.AM,ESTADO.AP,ESTADO.PA,ESTADO.RO,ESTADO.RR,ESTADO.TO})
+    ,NE("Nordeste", new ESTADO[] {ESTADO.AL,ESTADO.BA,ESTADO.CE,ESTADO.MA,ESTADO.PB,ESTADO.PE,ESTADO.PI,ESTADO.RN,ESTADO.SE})
+    ,S("Sul", new ESTADO[] {ESTADO.PR,ESTADO.SC, ESTADO.RS})
+    ,SE("Sudeste", new ESTADO[] {ESTADO.SP,ESTADO.ES,ESTADO.MG,ESTADO.RJ})
     ;
 
-    REGIAO(String descricao) {
+    REGIAO(String descricao, ESTADO estado[]) {
     }
 }
