@@ -26,21 +26,21 @@ import java.util.*;
 
 public class WebCrawlerFourDevsGenerator {
 
-    WebDriver driver;
+    private static WebDriver driver;
     private static final ObjectMapper mapper = new ObjectMapper();
-    public static final String OUTPUT_FILE = "./fileOutput/jsonFile";
+    private static final String OUTPUT_FILE = "./fileOutput/jsonFile";
     private static final Logger logger
             = LoggerFactory.getLogger(WebCrawlerFourDevsGenerator.class);
 
-    private void setupChromeDriver(){
+    private static void setupChromeDriver(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
         // options.addArguments("--headless=new");// para abrir sem GUI
-        this.driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
     }
 
-    public void genPerson(int numPeople){
+    public static void genPerson(int numPeople){
 
         if(numPeople < 1 || numPeople > 29){
             logger.error("Foi colocado uma quantidade incorreta");
@@ -78,12 +78,11 @@ public class WebCrawlerFourDevsGenerator {
             driver.quit();
         }
 
-        this.saveToFile(generatedPeopleList);
+        saveToFile(generatedPeopleList);
         driver.quit();
-        //https://www.4devs.com.br/gerador_de_pessoas
     }
 
-    void saveToFile(Set<GeneratedPerson> peopleList){
+    private static void saveToFile(Set<GeneratedPerson> peopleList){
             try {
                 mapper.writerWithDefaultPrettyPrinter().writeValue(
                         new File(OUTPUT_FILE),
