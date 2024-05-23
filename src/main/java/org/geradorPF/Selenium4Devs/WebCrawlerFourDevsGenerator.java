@@ -28,7 +28,7 @@ public class WebCrawlerFourDevsGenerator {
 
     private static WebDriver driver;
     private static final ObjectMapper mapper = new ObjectMapper();
-    private static final String OUTPUT_FILE = "./fileOutput/jsonFile";
+    public static final String OUTPUT_FILE = "./fileOutput/jsonFile";
     private static final Logger logger
             = LoggerFactory.getLogger(WebCrawlerFourDevsGenerator.class);
 
@@ -40,7 +40,7 @@ public class WebCrawlerFourDevsGenerator {
         driver = new ChromeDriver(options);
     }
 
-    public static void genPerson(int numPeople){
+    public static HashSet<GeneratedPerson> genPeople(int numPeople){
 
         if(numPeople < 1 || numPeople > 29){
             logger.error("Foi colocado uma quantidade incorreta");
@@ -68,7 +68,7 @@ public class WebCrawlerFourDevsGenerator {
                 .getText();
 
         TypeReference<HashSet<GeneratedPerson>> reference = new TypeReference<>(){};
-        Set<GeneratedPerson> generatedPeopleList;
+        HashSet<GeneratedPerson> generatedPeopleList;
         try {
             generatedPeopleList = mapper.readValue(generatedJson,reference);
         } catch (JsonProcessingException e) {
@@ -77,9 +77,10 @@ public class WebCrawlerFourDevsGenerator {
         } finally {
             driver.quit();
         }
-
         saveToFile(generatedPeopleList);
-        driver.quit();
+        logger.debug("metodo genPeople concluiu a execução.");
+        return generatedPeopleList;
+
     }
 
     private static void saveToFile(Set<GeneratedPerson> peopleList){
